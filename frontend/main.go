@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/roylisto/gin-golang-react/api"
@@ -21,5 +19,5 @@ func main() {
 	router.SetupRouter(app)
 
 	// Start and run the server on localhost as default
-	app.Run("127.0.0.1:" + os.Getenv("PORT"))
+	app.Run("127.0.0.1:5555")
 }

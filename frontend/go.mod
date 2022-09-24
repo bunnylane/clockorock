@@ -1,8 +1,12 @@
 module github.com/bunnylane/clockorock/frontend
 
-go 1.19
+go 1.18
 
-require github.com/gin-gonic/gin v1.8.1
+require (
+	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19
+	github.com/gin-gonic/gin v1.8.1
+	github.com/roylisto/gin-golang-react v0.0.0-20210916050058-6cd870c9ef6d
+)
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect

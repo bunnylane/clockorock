@@ -1,26 +1,12 @@
-
 import React from 'react'
-import logo from './logo.svg';
 import './app.css';
 
 function App() {
     return (
         <div className="App">
+            <p>Header</p>
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-                {/* Please read on README.md about ENV */}
-                <p>Your Environment: {process.env.APP_ENV}</p>
+                <p>Initialize</p>
             </header>
         </div>
     );
