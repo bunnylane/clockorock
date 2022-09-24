@@ -3,23 +3,23 @@ package main
 import (
 	"os"
 
-	"github.com/bunnylane/clockorock/frontend/routes"
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
+	"github.com/roylisto/gin-golang-react/api"
 )
 
 func main() {
+	router := api.NewRouter()
 
-	port := os.Getenv("PORT")
+	// Set the router as the default one shipped with Gin
+	app := gin.Default()
 
-	if port == "" {
-		port = "8000"
-	}
+	// Serve frontend static files
+	app.Use(static.Serve("/", static.LocalFile("./dist", true)))
 
-	router := gin.New()
-	router.Use(gin.Logger())
+	// Initialize the route
+	router.SetupRouter(app)
 
-	router.GET("/", routes.ServeApp)
-
-	//this runs the server and allows it to listen to requests.
-	router.Run(":" + port)
+	// Start and run the server on localhost as default
+	app.Run("127.0.0.1:" + os.Getenv("PORT"))
 }
