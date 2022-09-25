@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom';
 import './app.css';
-import Navbar from './Components/Navbar/navbar';
-import Footer from './Components/Footer/footer';
+import Navbar from './components/navbar/navbar';
+import Footer from './components/footer/footer';
 
 class App extends React.Component {
     render(){
