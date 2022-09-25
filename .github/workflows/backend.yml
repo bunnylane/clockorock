@@ -20,13 +20,7 @@ jobs:
       name:  Install go ${{ env.GO_VERSION }}
       with:
         go-version: ${{ env.GO_VERSION }}
-    - name: Install go test framework 
-      run: 'go install github.com/stretchr/gorc'
-    - name: 'Vetting Code'
-      run: gorc vet
-    - name: "Publish Code Coverage"
-      uses: marocchino/sticky-pull-request-comment@v2
-      if: github.event_name == 'pull_request'
-      with:
-        recreate: true
-        path: code-coverage-results.md
+    - name: 'Build Solution'
+      run: go build -v -o app -race ./backend
+    - name: 'Test Solution'
+      run: go test -v ./backend
