@@ -21,7 +21,7 @@ jobs:
       with:
         go-version: ${{ env.GO_VERSION }}
     - name: Install go test framework 
-      run: 'go get github.com/stretchr/gorc'
+      run: 'go install github.com/stretchr/gorc'
     - name: 'Run Tests'
       run: gorc
 
