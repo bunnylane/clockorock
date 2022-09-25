@@ -4,7 +4,6 @@
 *.dll
 *.so
 *.dylib
-app
 
 #macOS
 .DS_Store
