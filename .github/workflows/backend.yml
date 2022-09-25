@@ -69,14 +69,11 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - uses: azure/docker-login@v1
-      with:
-        registry: ${{ secrets.ACR_ENDPOINT }}
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
+    - name: 'kake'
+      run: 'echo ${{ needs.container-build.outputs.dockertag }}'
     - uses: azure/webapps-deploy@v2
       name: 'Deploy Container'
       with:
         app-name: '${{ env.APP_NAME }}'
-        images: '${{ needs.dockertag }}'
+        images: '${{ needs.container-build.outputs.dockertag }}'
            
