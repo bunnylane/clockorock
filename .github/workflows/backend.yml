@@ -33,12 +33,10 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
-    outputs:
-      dockertag: ${{ steps.output.outputs.dockertag }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Export dockertag
+      - name: Set docker tag
         run: |
           export DOCKERTAG="${{ secrets.ACR_ENDPOINT }}/$APP:$GITHUB_SHA"
           echo "DOCKERTAG=${DOCKERTAG}" >> $GITHUB_ENV
@@ -55,9 +53,6 @@ jobs:
           # push: ${{ github.ref_name == 'main' }}
           push: true
           tags: '${{ env.DOCKERTAG }}'
-      - name: Set output
-        id: output
-        run: echo "::set-output name=dockertag::${{ env.DOCKERTAG }}"
   
   publish-container:
     name: 'CD / App Service'
@@ -65,15 +60,17 @@ jobs:
     runs-on: ubuntu-latest
     # if: ${{ github.ref_name == 'main' }}
     steps:
+    - name: Set docker tag
+      run: |
+        export DOCKERTAG="${{ secrets.ACR_ENDPOINT }}/$APP:$GITHUB_SHA"
+        echo "DOCKERTAG=${DOCKERTAG}" >> $GITHUB_ENV
     - name: Azure Login
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: 'kake'
-      run: 'echo ${{ needs.container-build.outputs.dockertag }}'
     - uses: azure/webapps-deploy@v2
       name: 'Deploy Container'
       with:
         app-name: '${{ env.APP_NAME }}'
-        images: '${{ needs.container-build.outputs.dockertag }}'
+        images: '${{ env.DOCKERTAG }}'
            
