@@ -51,7 +51,7 @@ jobs:
       - name: Build and cache image
         uses: docker/build-push-action@v3
         with:
-          context: $APP
+          context: ./$APP
           push: true
           tags: '${{ env.DOCKERTAG }}'
       - name: Set output
