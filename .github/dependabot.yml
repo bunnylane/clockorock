@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+    commit-message:
+      include: scope
+      prefix: "GO Backend Dependencies"
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "gomod"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+    commit-message:
+      include: scope
+      prefix: "GO Frontend Dependencies"
+      
+  # Maintain dependencies for Composer
+  - package-ecosystem: "npm"
+    directory: "/frontend/app"
+    schedule:
+      interval: "daily"
+    commit-message:
+      include: scope
+      prefix: "JS Frontend Dependencies"
