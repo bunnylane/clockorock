@@ -9,25 +9,26 @@ on:
 env:
   GO_VERSION: 1.18
   APP: backend
+  APP_NAME: webappclockorocklab001
 
 jobs:
-  # tests:
-  #   runs-on: ubuntu-latest
-  #   name: 'Continous Integration'
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #     name: 'Checkout Repository'
-  #   - uses: actions/setup-go@v3
-  #     name:  Install go ${{ env.GO_VERSION }}
-  #     with:
-  #       go-version: ${{ env.GO_VERSION }}
-  #   - name: 'Build Solution'
-  #     run: go build -v -o app -race ./$APP
-  #   - name: 'Test Solution'
-  #     run: go test -v ./$APP
+  tests:
+    runs-on: ubuntu-latest
+    name: 'CI / Tests'
+    steps:
+    - uses: actions/checkout@v3
+      name: 'Checkout Repository'
+    - uses: actions/setup-go@v3
+      name:  Install go ${{ env.GO_VERSION }}
+      with:
+        go-version: ${{ env.GO_VERSION }}
+    - name: 'Build Solution'
+      run: go build -v -o app -race ./$APP
+    - name: 'Test Solution'
+      run: go test -v ./$APP
   
   container-build:
-    name: Build artifact
+    name: 'CI / Docker'
     runs-on: ubuntu-latest
     permissions:
       contents: "read"
@@ -51,8 +52,26 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./${{ env.APP }}
-          push: ${{ github.ref_name == 'main' }}
+          # push: ${{ github.ref_name == 'main' }}
+          push: true
           tags: '${{ env.DOCKERTAG }}'
       - name: Set output
         id: output
         run: echo "::set-output name=dockertag::${{ env.DOCKERTAG }}"
+  
+  publish-container:
+    name: 'CD / App Service'
+    needs: container-build
+    runs-on: ubuntu-latest
+    # if: ${{ github.ref_name == 'main' }}
+    steps:
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/webapps-deploy@v2
+      name: 'Deploy Container'
+      with:
+        app-name: '${{ env.APP_NAME }}'
+        images: '${{ needs.dockertag }}'
+           
