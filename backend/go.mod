@@ -1,4 +1,4 @@
-module github.com/bunnylane/clockorock/server
+module github.com/bunnylane/clockorock/backend
 
 go 1.18
 

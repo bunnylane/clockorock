@@ -1,0 +1,23 @@
+name: Backend CI/CD
+
+on:
+  push:
+    paths:
+      - "backend/**"
+      - ".github/workflows/**"
+
+env:
+  GO_VERSION: 1.18
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    name: "Continous Integration"
+    steps:
+    - uses: actions/checkout@v3
+      name: "Checkout Repository"
+    - uses: actions/setup-go@v3
+      with:
+        go-version: $GO_VERSION
+  
+  
