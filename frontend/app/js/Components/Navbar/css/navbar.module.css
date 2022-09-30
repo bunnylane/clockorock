@@ -1,0 +1,50 @@
+/* Main Big screen size */
+.nav{
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+    background: rgba(14,12,4, 0.3);
+  
+}
+
+.menu{
+    list-style-type: none;
+    padding:0;
+    margin:0;
+    display: flex;
+    flex:0 1 30vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navMenuA{
+    text-decoration: none;
+    font-size: 13px;
+    padding: 10px 19px;
+    text-transform: uppercase;
+    text-shadow: none;
+    letter-spacing: .18em;
+    font-family: futuraLight;
+}
+
+.menuRight{
+    justify-content: flex-end;
+}
+/* end big screen sizes */
+
+/* Mobile */
+
+@media only screen and (max-width: 1100px){
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: "";
+    position: absolute;
+    clear: both;
+    }
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: "";
+    position: absolute;
+    clear: both;
+    }
+}
