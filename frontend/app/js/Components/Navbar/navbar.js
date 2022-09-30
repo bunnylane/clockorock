@@ -1,50 +1,47 @@
 import React from "react";
+import logo from './img/logo_transparent.png'
+import style from './css/navbar.module.css';
+
 
 class Navbar extends React.Component {
+  
   render() {
+    
     return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-          Navbar
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">
-                Home <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                Features
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                Pricing
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">
-                Disabled
-              </a>
-            </li>
-          </ul>
+      <nav className={style.nav}>
+        <input type="checkbox" />
+        <ul className={[style.menu, style.menuRight].join(' ')}>
+          <li>
+            <a className={style.navMenuA}>Hellu</a>
+          </li>
+          <li>
+            <a className={style.navMenuA}>Hellu</a>
+          </li>
+          <li>
+            <a className={style.navMenuA}>Hellu</a>
+          </li>
+        </ul>
+        {/* end left nav */}
+        <div>
+          <img src={logo} width="260px" height="100px" alt="logo"/> 
         </div>
+      <ul className={`${style.menu}`}>
+        <li>
+          <a className={style.navMenuA}>Hellu</a>
+        </li>
+        <li>
+          <a className={style.navMenuA}>Hellu</a>
+        </li>
+        <li>
+          <a className={style.navMenuA}>Hellu</a>
+          </li>
+        </ul>
+        <label for="nav-mobile-toggle" class="nav-toggle-label">
+            <span></span>
+        </label>
+        {/* end right nav */}
       </nav>
     );
   }
 }
-
 export default Navbar;
