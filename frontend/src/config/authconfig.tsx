@@ -1,3 +1,4 @@
+import { LogLevel } from "@azure/msal-browser";
 
 export const b2cPolicies = {
     names: {
@@ -11,9 +12,15 @@ export const b2cPolicies = {
         },
         forgotPassword: {
             authority: "https://bunnylane.b2clogin.com/bunnylane.onmicrosoft.com/B2C_1_clockorock_password_reset",
+            scopes: [
+                ""
+            ]
         },
         editProfile: {
-            authority: "https://bunnylane.b2clogin.com/bunnylane.onmicrosoft.com/B2C_1_clockorock_profile_edit"
+            authority: "https://bunnylane.b2clogin.com/bunnylane.onmicrosoft.com/B2C_1_clockorock_profile_edit",
+            scopes: [
+                ""
+            ]
         }
     },
     authorityDomain: "bunnylane.b2clogin.com"
@@ -34,7 +41,7 @@ export const msalConfig = {
     },
     system: {
         loggerOptions: {
-            loggerCallback: (level, message, containsPii) => {
+            loggerCallback: (level : LogLevel, message: any, containsPii: any) => {
                 if (containsPii) {
                     return;
                 }
@@ -50,6 +57,8 @@ export const msalConfig = {
                         return;
                     case LogLevel.Warning:
                         console.warn(message);
+                        return;
+                    default:
                         return;
                 }
             }

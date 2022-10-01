@@ -5,16 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { msalConfig } from './config/authconfig';
 import { PublicClientApplication } from '@azure/msal-browser';
+import { BrowserRouter } from 'react-router-dom';
+import { MsalProvider } from '@azure/msal-react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const msalInstance = new PublicClientApplication(msalConfig)
-
 root.render(
   <React.StrictMode>
-    <App authentication={msalInstance}/>
+      <App />
   </React.StrictMode>
 );
 
